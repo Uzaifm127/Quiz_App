@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat&family=Chokokutai&family=Homemade+Apple&family=Poppins&family=Quicksand&family=Roboto+Mono&family=Rubik&family=Sacramento&family=Zeyada&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Rubik', sans-serif;
+}
+
+#mainBody {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.quizContainer,
+.scoreContainer {
+  text-align: center;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1),
+    -4px -4px 8px rgba(255, 255, 255, 0.5);
+  min-width: 30vmax;
+  max-width: 50vmax;
+  border-radius: 1vmax;
+  padding: 2vmax;
+  font-size: 1.8vmax;
+}
+
+.questionContainer {
+  display: flex;
+  padding: 1vmax;
+  background: aliceblue;
+  pointer-events: none;
+  border-radius: 0.7vmax;
+  box-shadow: 0 0 10px #7955484a;
+}
+
+.mainQue{
+  text-align: start;
+}
+
+.queNum {
+  padding-right: 1vmax;
+}
+
+.optionContainer {
+  margin: 1vmax 0vmax;
+}
+
+.options {
+  padding: 1vmax;
+  margin: 1vmax 0vmax;
+  font-size: 1.4vmax;
+  cursor: pointer;
+  text-align: start;
+  border-radius: 0.5vmax;
+  background: white;
+  box-shadow: 0 0 10px #7955484a;
+  transition: all 0.5s ease;
+}
+
+.optClick {
+  background: #b8ffb8;
+}
+
+.options:hover {
+  transform: scale(1.05);
+}
+
+.submitBtn {
+  width: 100%;
+  cursor: pointer;
+  background: #005aff;
+  outline: none;
+  border: none;
+  color: white;
+  padding: 1vmax 0vmax;
+  font-size: 1.5vmax;
+  border-radius: 0.5vmax;
+}
+
+.btnContainer {
+  width: 100%;
+  text-align: center;
+}
