@@ -11,17 +11,14 @@ let optValue = [];
 
 // Functions
 const singleCorrect = (sCAns) => {
-  if (sCAns === questions[queInd].options[questions[queInd].correct[0]]) {
-    marks += 4;
-  } else {
-    marks -= 1;
-  }
+  const sCorrectAns = questions[queInd].options[questions[queInd].correct[0]];
+  marks += sCAns === sCorrectAns ? 4 : -1;
 };
 
 const multiCorrect = (mCAns) => {
-  const correctOptions = questions[queInd].correct.map((cAnsIndex) => {
-    return questions[queInd].options[cAnsIndex];
-  });
+  const correctOptions = questions[queInd].correct.map(
+    (cAnsIndex) => questions[queInd].options[cAnsIndex]
+  );
   const allOptCorrect = mCAns.every((element) =>
     correctOptions.includes(element)
   );
@@ -52,7 +49,6 @@ const submitLogic = () => {
     queInd++;
     queInd <= questions.length - 1 ? renderQuiz() : renderScore();
   }
-  console.log(marks);
 };
 
 const renderScore = () => {
@@ -68,35 +64,38 @@ const renderScore = () => {
 const renderQuiz = () => {
   queNum.innerHTML = "Q." + (queInd + 1); // Imp Concept
   mainQue.innerHTML = questions[queInd].question;
-  options.forEach((element, index) => {
-    element.innerHTML = questions[queInd].options[index];
-  });
+  options.forEach(
+    (element, index) => (element.innerHTML = questions[queInd].options[index])
+  );
 };
 
 const deselectOpt = () => {
-  options.forEach((element) => {
-    element.classList.remove("optClick");
-  });
+  options.forEach((element) => element.classList.remove("optClick"));
 };
 
-const selectOpt = (e) => {
-  if (questions[queInd].correct.length === 1) {
-    optValue = e.target;
-    deselectOpt();
+const optHandler = (e) => {
+  const currentElement = e.target;
+  if (currentElement.classList.contains("optClick")) {
+    if (questions[queInd].correct.length === 1) {
+      currentElement.classList.remove("optClick");
+      optValue = [];
+    } else {
+      currentElement.classList.remove("optClick");
+      optValue.splice(optValue.indexOf(currentElement.innerHTML), 1);
+    }
   } else {
-    optValue.push(e.target.innerHTML);
+    if (questions[queInd].correct.length === 1) {
+      optValue = currentElement;
+      deselectOpt();
+    } else {
+      optValue.push(currentElement.innerHTML);
+    }
+    e.target.classList.add("optClick");
   }
-  e.target.classList.add("optClick");
-};
-
-const unselectOpt = (e) => {
-  e.target.classList.remove("optClick");
 };
 
 // Main Logic
-options.forEach((element) => {
-  element.addEventListener("click", selectOpt);
-});
+options.forEach((element) => element.addEventListener("click", optHandler));
 
 subBtn.addEventListener("click", submitLogic);
 
